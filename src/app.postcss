@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+html, body { @apply h-full; }
+
+.light body {
+    background: #e5e5e5;
+}
+
+.dark body {
+    background: black;
+}
+
+.icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+}
+
+svg {
+    color: #000;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+a {
+    -webkit-word-wrap: break-word;
+    -webkit-word-break: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}

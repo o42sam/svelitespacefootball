@@ -1,0 +1,7 @@
+@supports (-webkit-touch-callout: none) {
+    .ios-word-wrap {
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+  }
+  
