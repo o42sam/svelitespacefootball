@@ -75,11 +75,11 @@
 
 
 <svelte:head>
-	<title>Elite Space Football Home</title>
+	<title>Elite Space Football</title>
 	<meta name="description" content="Discover the best that African amateur football has to offer as we find and train the most talented teenage players, and collect their best footballing moments, and facilitate their ascension to the global stage." />
-	<meta name="keywords" content="homepage, home page, elite, elite space, elite space football, football, talent" />
+	<meta name="keywords" content="homepage, home page, elite, elite space, elite space football, football, talent, elite football, elite club, elite fc" />
 	
-	<meta property="og:title" content="Elite Space Football | Home">
+	<meta property="og:title" content="Elite Space Football">
 	<meta property="og:description" content="Discover the best that African amateur football has to offer as we find and train the most talented teenage players, and collect their best footballing moments, and facilitate their ascension to the global stage.">
 	<meta property="og:image" content="{logo}">
 	<meta property="og:url" content="https://elitespacefootball.com">

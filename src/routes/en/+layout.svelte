@@ -13,6 +13,7 @@
 	import Chat from '$lib/components/Chat.svelte';
 	import Icon from '$lib/components/Icon.svelte';
 	import LoadingScreen from '$lib/components/LoadingScreen.svelte';
+	import Map from '$lib/components/Map.svelte';
 	
 	import { slide, fade } from 'svelte/transition';
 
@@ -32,6 +33,8 @@
 	
 	initializeStores();
 	
+	let specialClasses = "bg-lime-200";
+
 	let language = $currentLanguage.trimEnd()
 	let chosenLanguage = language
 	const siteLanguages = [{
@@ -92,9 +95,10 @@ function getCookies() {
 		bgDrawer: 'bg-neutral-200 text-primary-700',
 		bgBackdrop: 'bg-black bg-opacity-80',
 		padding: 'p-0',
-		position: 'right',
+		position: 'left',
 		width: 'w-1/2',
 		height: 'h-full',
+		rounded: 'rounded-none',
 		meta: {
 			drawerOpen: false
 		}
@@ -120,7 +124,7 @@ function getCookies() {
 
             let primaryLanguage = browserLanguage.split('-')[0];
 
-            if ($languages.some(language => language.code === primaryLanguage)) {
+            if ($languages.some((language: any) => language.code === primaryLanguage)) {
                 currentLanguage.set(primaryLanguage)
 				if (!$page.url.pathname) {
 					goto(`/${primaryLanguage}`)
@@ -366,13 +370,14 @@ buttonDismiss="btn variant-outline outline-black"
 width="w-full"
 padding="py-10 px-40" />
 {/if}
-<header class="flex flex-col items-center justify-center fixed w-full z-40 bg-neutral-200 top-0">
+{#key $page.url.pathname}
+<header class="flex flex-col items-center justify-center fixed w-full z-40 top-0 {$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out">
 	<div class="flex items-center justify-evenly p-2 w-full">
 		<a href="/{language}">
 			<img class="h-4 m-2" src="{logo}" alt="Elite Space Football logo" />
 		</a>
 		<nav>
-			<ul class="flex items-center justify-evenly capitalize space-x-16 font-bold text-primary-700 bg-neutral-200">
+			<ul class="flex items-center justify-evenly capitalize space-x-16 font-bold text-primary-700 bg-inherit">
 				{#each menu as item, index (index)}
 				{#if !item.dropdown}
 				<li><a href="{item.href}" class="hover:text-black {$page.url.pathname.includes(item.href) ? "text-black": "text-inherit"}">{item.label}</a></li>
@@ -407,104 +412,107 @@ padding="py-10 px-40" />
 		</div>
 	</div>
 	{#if $page.url.pathname.includes("/about")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		About
 	</h1>
 	{:else if $page.url.pathname.includes("/contact")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		Contact
 	</h1>
 	{:else if $page.url.pathname.includes("/academy/enrollment")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		Academy Enrollment
 	</h1>
 	{:else if $page.url.pathname.includes("/academy/players")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		The Players
 	</h1>
 	{:else if $page.url.pathname.includes("/media")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		Media
 	</h1>
 	{:else if $page.url.pathname.includes("/cookies")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		Cookies
 	</h1>
 	{:else if $page.url.pathname.includes("/legal")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700">
 		Legal Notice
 	</h1>
 	{:else if $page.url.pathname.includes("/privacypolicy")}
-	<h1 class="bg-neutral-200 text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700 fixed z-10">
+	<h1 class="{$page.url.pathname.includes("players") ? "bg-lime-200" : "bg-neutral-200"} transition duration-500 ease-in-out text-primary-700 p-4 text-xl uppercase w-full text-center border-b-2 border-primary-700 fixed z-10">
 		Privacy Policy
 	</h1>
 	{/if}
 </header>
-<aside class="fixed mt-60 capitalize text-primary-700 -z-10 w-60 p-9">
-	{#if $page.url.pathname.includes("about")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{aboutPageNav.left.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each aboutPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{:else if $page.url.pathname.includes("contact")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{contactPageNav.left.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each contactPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{:else if $page.url.pathname.includes("enrollment")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{enrollmentPageNav.left.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each enrollmentPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{/if}
-</aside>
-<main class="flex flex-col">
-	<slot />
+{/key}
+<main class="relative flex w-full justify-between">
+	<aside class="fixed left-5 mt-40 capitalize text-primary-700 z-10 w-72 p-9">
+		{#if $page.url.pathname.includes("about")}
+		<h3 class="text-lg uppercase text-black pl-20 mb-6">{aboutPageNav.left.title}</h3>
+		<ul class="space-y-6 pl-20">
+			{#each aboutPageNav.left.items as item, index (index)}
+			<li>
+				<a href="{item.href}" class="hover:underline text-lg">{item.label}</a>
+			</li>
+			{/each}
+		</ul>
+		{:else if $page.url.pathname.includes("contact")}
+		<h3 class="text-lg uppercase text-black pl-20 mb-6">{contactPageNav.left.title}</h3>
+		<ul class="space-y-6 pl-20">
+			{#each contactPageNav.left.items as item, index (index)}
+			<li>
+				<a href="{item.href}" class="hover:underline text-lg">{item.label}</a>
+			</li>
+			{/each}
+		</ul>
+		{:else if $page.url.pathname.includes("enrollment")}
+		<h3 class="text-lg uppercase text-black pl-20 mb-6">{enrollmentPageNav.left.title}</h3>
+		<ul class="space-y-6 pl-20">
+			{#each enrollmentPageNav.left.items as item, index (index)}
+			<li>
+				<a href="{item.href}" class="hover:underline text-lg">{item.label}</a>
+			</li>
+			{/each}
+		</ul>
+		{/if}
+	</aside>
+	<main class="flex flex-col">
+		<slot />
+	</main>
+	<aside class="fixed right-5 mt-40 capitalize text-primary-700 z-10 w-72 p-9">
+		{#if $page.url.pathname.includes("about")}
+		<h3 class="text-lg uppercase text-black pl-20 mb-6">{aboutPageNav.right.title}</h3>
+		<ul class="space-y-6 pl-20">
+			{#each aboutPageNav.right.items as item, index (index)}
+			<li>
+				<a href="{item.href}" class="hover:underline text-lg">{item.label}</a>
+			</li>
+			{/each}
+		</ul>
+		{:else if $page.url.pathname.includes("contact")}
+		<div class="flex flex-col items-center justify-center overflow-visible">
+			<h3 class="text-lg uppercase text-black mb-6">
+				Elite Space Football Head Office
+			</h3>
+			<Map
+			widthClass="w-72"
+			otherClasses="border border-primary-700 rounded-lg"/>
+		</div>
+		{:else if $page.url.pathname.includes("enrollment")}
+		<h3 class="text-lg uppercase text-black pl-20 mb-6">{enrollmentPageNav.right.title}</h3>
+		<ul class="space-y-6 pl-20">
+			{#each enrollmentPageNav.right.items as item, index (index)}
+			<li>
+				<a href="{item.href}" class="hover:underline text-lg">{item.label}</a>
+			</li>
+			{/each}
+		</ul>
+		{/if}
+	</aside>
 </main>
-<aside class="fixed mt-60 capitalize text-primary-700 z-10 p-9">
-	{#if $page.url.pathname.includes("about")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{aboutPageNav.right.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each aboutPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{:else if $page.url.pathname.includes("contact")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{contactPageNav.right.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each contactPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{:else if $page.url.pathname.includes("enrollment")}
-	<h3 class="text-2xl uppercase text-black pl-20 mb-6">{enrollmentPageNav.right.title}</h3>
-	<ul class="space-y-6 pl-20">
-		{#each enrollmentPageNav.left.items as item, index (index)}
-		<li>
-			<a href="{item.href}" class="hover:underline text-xl">{item.label}</a>
-		</li>
-		{/each}
-	</ul>
-	{/if}
-</aside>
-<footer class="flex flex-col items-center justify-end p-10 font-thin text-white bg-primary-700 z-20">
-	<div class="flex flex-col items-center p-20 text-2xl">
+<footer class="relative flex flex-col items-center justify-end p-10 font-thin text-white bg-primary-700 z-20">
+	<div class="flex flex-col items-center p-20 text-xl">
 		<a href="" role="button" class="btn flex flex-col items-center rounded-3xl text-lime-200 uppercase p-16" on:click={() => newsletterModalActive = true}>
 		  <h2 class="text-3xl m-0">Subscribe to our newsletter</h2>
 		  <span class="font-thin text-3xl  normal-case">

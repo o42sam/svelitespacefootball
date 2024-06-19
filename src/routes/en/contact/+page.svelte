@@ -63,11 +63,11 @@
     </p>
     <p class="text-neutral-700 text-xs text-center m-4">Last updated on May 30, 2024</p>
     <section class="flex flex-col items-center justify-evenly w-full h-96 p-9">
-      <a class="btn flex variant-filled bg-primary-700 text-3xl uppercase p-9 space-x-4" href="" on:click={sendEmail}>
+      <a class="btn flex variant-filled bg-primary-700 text-3xl uppercase p-9 space-x-4 w-full rounded-lg" href="" on:click={sendEmail}>
         <p>Send us an email</p>
         <Icon name="mail" size="{40}" color="white" />
       </a>
-      <a class="btn flex variant-filled bg-primary-700 text-3xl uppercase p-9 space-x-4" href="" on:click={openWhatsApp}>
+      <a class="btn flex variant-filled bg-primary-700 text-3xl uppercase p-9 space-x-4 w-full rounded-lg" href="" on:click={openWhatsApp}>
         <p>WhatsApp Direct Message</p>
         <Icon name="whatsapp" size="{40}" color="white" />
       </a>
